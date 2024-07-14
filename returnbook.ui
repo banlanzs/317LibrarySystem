@@ -158,6 +158,32 @@
     <string>书名......</string>
    </property>
   </widget>
+  <widget class="QGraphicsView" name="graphicsView">
+   <property name="geometry">
+    <rect>
+     <x>0</x>
+     <y>0</y>
+     <width>661</width>
+     <height>461</height>
+    </rect>
+   </property>
+   <property name="minimumSize">
+    <size>
+     <width>661</width>
+     <height>461</height>
+    </size>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">background-image: url(:/new/prefix1/background.png);</string>
+   </property>
+  </widget>
+  <zorder>graphicsView</zorder>
+  <zorder>backButton_2</zorder>
+  <zorder>searchButton</zorder>
+  <zorder>tableWidget</zorder>
+  <zorder>returnButton</zorder>
+  <zorder>refreshButton</zorder>
+  <zorder>bookname</zorder>
  </widget>
  <resources/>
  <connections/>

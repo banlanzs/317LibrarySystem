@@ -193,6 +193,35 @@ color: rgb(255, 0, 0);</string>
     </property>
    </column>
   </widget>
+  <widget class="QGraphicsView" name="graphicsView">
+   <property name="geometry">
+    <rect>
+     <x>0</x>
+     <y>0</y>
+     <width>621</width>
+     <height>391</height>
+    </rect>
+   </property>
+   <property name="minimumSize">
+    <size>
+     <width>621</width>
+     <height>391</height>
+    </size>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">background-image: url(:/new/prefix1/background.png);</string>
+   </property>
+  </widget>
+  <zorder>graphicsView</zorder>
+  <zorder>label</zorder>
+  <zorder>label_2</zorder>
+  <zorder>backButton_2</zorder>
+  <zorder>searchButton</zorder>
+  <zorder>borrowButton</zorder>
+  <zorder>refreshButton</zorder>
+  <zorder>bookname</zorder>
+  <zorder>lineEdit</zorder>
+  <zorder>booksWidget</zorder>
  </widget>
  <resources/>
  <connections/>

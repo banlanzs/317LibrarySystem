@@ -33,9 +33,9 @@
   <widget class="QLabel" name="label">
    <property name="geometry">
     <rect>
-     <x>80</x>
+     <x>30</x>
      <y>30</y>
-     <width>231</width>
+     <width>331</width>
      <height>71</height>
     </rect>
    </property>
@@ -106,6 +106,26 @@ color: rgb(0, 170, 0);</string>
     <string>预约</string>
    </property>
   </widget>
+  <widget class="QGraphicsView" name="graphicsView">
+   <property name="geometry">
+    <rect>
+     <x>0</x>
+     <y>0</y>
+     <width>401</width>
+     <height>301</height>
+    </rect>
+   </property>
+   <property name="minimumSize">
+    <size>
+     <width>401</width>
+     <height>301</height>
+    </size>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">background-image: url(:/new/prefix1/background.png);</string>
+   </property>
+  </widget>
+  <zorder>graphicsView</zorder>
   <zorder>label</zorder>
   <zorder>widget</zorder>
   <zorder>borrowButton</zorder>
