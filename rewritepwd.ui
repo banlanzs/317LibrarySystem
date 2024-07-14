@@ -1,0 +1,149 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>rewritepwd</class>
+ <widget class="QDialog" name="rewritepwd">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>403</width>
+    <height>237</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>Dialog</string>
+  </property>
+  <widget class="QWidget" name="layoutWidget">
+   <property name="geometry">
+    <rect>
+     <x>-40</x>
+     <y>-70</y>
+     <width>2</width>
+     <height>2</height>
+    </rect>
+   </property>
+   <layout class="QVBoxLayout" name="verticalLayout"/>
+  </widget>
+  <widget class="QPushButton" name="back2Button">
+   <property name="geometry">
+    <rect>
+     <x>270</x>
+     <y>190</y>
+     <width>121</width>
+     <height>31</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>返回</string>
+   </property>
+  </widget>
+  <widget class="QLineEdit" name="confirmnewpwd">
+   <property name="geometry">
+    <rect>
+     <x>20</x>
+     <y>90</y>
+     <width>371</width>
+     <height>31</height>
+    </rect>
+   </property>
+   <property name="placeholderText">
+    <string>请确认新密码......</string>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="sendCodeButton">
+   <property name="geometry">
+    <rect>
+     <x>289</x>
+     <y>130</y>
+     <width>101</width>
+     <height>31</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>发送验证码</string>
+   </property>
+  </widget>
+  <widget class="QLineEdit" name="newpwd">
+   <property name="geometry">
+    <rect>
+     <x>20</x>
+     <y>50</y>
+     <width>371</width>
+     <height>31</height>
+    </rect>
+   </property>
+   <property name="placeholderText">
+    <string>请输入新密码......</string>
+   </property>
+  </widget>
+  <widget class="QLineEdit" name="Reuserid">
+   <property name="geometry">
+    <rect>
+     <x>20</x>
+     <y>9</y>
+     <width>371</width>
+     <height>31</height>
+    </rect>
+   </property>
+   <property name="placeholderText">
+    <string>请输入学号......</string>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="rewritepwd_2">
+   <property name="geometry">
+    <rect>
+     <x>20</x>
+     <y>190</y>
+     <width>121</width>
+     <height>31</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>确认重置密码</string>
+   </property>
+  </widget>
+  <widget class="QLineEdit" name="qqemailMa">
+   <property name="geometry">
+    <rect>
+     <x>20</x>
+     <y>130</y>
+     <width>271</width>
+     <height>31</height>
+    </rect>
+   </property>
+   <property name="placeholderText">
+    <string>请输入验证码......</string>
+   </property>
+  </widget>
+  <widget class="QGraphicsView" name="graphicsView">
+   <property name="geometry">
+    <rect>
+     <x>0</x>
+     <y>0</y>
+     <width>411</width>
+     <height>241</height>
+    </rect>
+   </property>
+   <property name="minimumSize">
+    <size>
+     <width>411</width>
+     <height>241</height>
+    </size>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">background-image: url(:/new/prefix1/background.png);</string>
+   </property>
+  </widget>
+  <zorder>graphicsView</zorder>
+  <zorder>layoutWidget</zorder>
+  <zorder>back2Button</zorder>
+  <zorder>confirmnewpwd</zorder>
+  <zorder>sendCodeButton</zorder>
+  <zorder>newpwd</zorder>
+  <zorder>Reuserid</zorder>
+  <zorder>rewritepwd_2</zorder>
+  <zorder>qqemailMa</zorder>
+ </widget>
+ <resources/>
+ <connections/>
+</ui>

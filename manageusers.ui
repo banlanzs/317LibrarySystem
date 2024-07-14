@@ -1,0 +1,278 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>ManageUsers</class>
+ <widget class="QDialog" name="ManageUsers">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>581</width>
+    <height>519</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>Dialog</string>
+  </property>
+  <widget class="QTableWidget" name="usersTable">
+   <property name="geometry">
+    <rect>
+     <x>10</x>
+     <y>10</y>
+     <width>555</width>
+     <height>264</height>
+    </rect>
+   </property>
+   <property name="minimumSize">
+    <size>
+     <width>541</width>
+     <height>261</height>
+    </size>
+   </property>
+   <row>
+    <property name="text">
+     <string>1</string>
+    </property>
+   </row>
+   <row>
+    <property name="text">
+     <string>2</string>
+    </property>
+   </row>
+   <row>
+    <property name="text">
+     <string>3</string>
+    </property>
+   </row>
+   <row>
+    <property name="text">
+     <string>4</string>
+    </property>
+   </row>
+   <row>
+    <property name="text">
+     <string>5</string>
+    </property>
+   </row>
+   <row>
+    <property name="text">
+     <string>6</string>
+    </property>
+   </row>
+   <row>
+    <property name="text">
+     <string>7</string>
+    </property>
+   </row>
+   <row>
+    <property name="text">
+     <string>8</string>
+    </property>
+   </row>
+   <row>
+    <property name="text">
+     <string>9</string>
+    </property>
+   </row>
+   <row>
+    <property name="text">
+     <string>10</string>
+    </property>
+   </row>
+   <column>
+    <property name="text">
+     <string>学号</string>
+    </property>
+   </column>
+   <column>
+    <property name="text">
+     <string>密码</string>
+    </property>
+   </column>
+   <column>
+    <property name="text">
+     <string>QQ邮箱</string>
+    </property>
+   </column>
+   <column>
+    <property name="text">
+     <string>注册时间</string>
+    </property>
+   </column>
+   <column>
+    <property name="text">
+     <string>在线状态</string>
+    </property>
+   </column>
+  </widget>
+  <widget class="QTableWidget" name="tableWidget">
+   <property name="geometry">
+    <rect>
+     <x>10</x>
+     <y>280</y>
+     <width>418</width>
+     <height>221</height>
+    </rect>
+   </property>
+   <property name="minimumSize">
+    <size>
+     <width>381</width>
+     <height>221</height>
+    </size>
+   </property>
+   <row>
+    <property name="text">
+     <string>1</string>
+    </property>
+   </row>
+   <row>
+    <property name="text">
+     <string>2</string>
+    </property>
+   </row>
+   <row>
+    <property name="text">
+     <string>3</string>
+    </property>
+   </row>
+   <row>
+    <property name="text">
+     <string>4</string>
+    </property>
+   </row>
+   <row>
+    <property name="text">
+     <string>5</string>
+    </property>
+   </row>
+   <row>
+    <property name="text">
+     <string>6</string>
+    </property>
+   </row>
+   <row>
+    <property name="text">
+     <string>7</string>
+    </property>
+   </row>
+   <row>
+    <property name="text">
+     <string>8</string>
+    </property>
+   </row>
+   <row>
+    <property name="text">
+     <string>9</string>
+    </property>
+   </row>
+   <row>
+    <property name="text">
+     <string>10</string>
+    </property>
+   </row>
+   <column>
+    <property name="text">
+     <string>书号</string>
+    </property>
+   </column>
+   <column>
+    <property name="text">
+     <string>书名</string>
+    </property>
+   </column>
+   <column>
+    <property name="text">
+     <string>借阅时间</string>
+    </property>
+   </column>
+   <column>
+    <property name="text">
+     <string>到期时间</string>
+    </property>
+   </column>
+  </widget>
+  <widget class="QPushButton" name="mindreturnButton">
+   <property name="geometry">
+    <rect>
+     <x>434</x>
+     <y>280</y>
+     <width>131</width>
+     <height>51</height>
+    </rect>
+   </property>
+   <property name="minimumSize">
+    <size>
+     <width>131</width>
+     <height>51</height>
+    </size>
+   </property>
+   <property name="text">
+    <string>提醒归还</string>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="closeButton">
+   <property name="geometry">
+    <rect>
+     <x>434</x>
+     <y>450</y>
+     <width>131</width>
+     <height>51</height>
+    </rect>
+   </property>
+   <property name="minimumSize">
+    <size>
+     <width>131</width>
+     <height>51</height>
+    </size>
+   </property>
+   <property name="text">
+    <string>关闭</string>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="refreshButton">
+   <property name="geometry">
+    <rect>
+     <x>434</x>
+     <y>337</y>
+     <width>131</width>
+     <height>51</height>
+    </rect>
+   </property>
+   <property name="minimumSize">
+    <size>
+     <width>131</width>
+     <height>51</height>
+    </size>
+   </property>
+   <property name="text">
+    <string>刷新</string>
+   </property>
+  </widget>
+  <widget class="QGraphicsView" name="graphicsView">
+   <property name="geometry">
+    <rect>
+     <x>0</x>
+     <y>0</y>
+     <width>591</width>
+     <height>521</height>
+    </rect>
+   </property>
+   <property name="minimumSize">
+    <size>
+     <width>591</width>
+     <height>521</height>
+    </size>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">background-image: url(:/new/prefix1/background.png);</string>
+   </property>
+  </widget>
+  <zorder>graphicsView</zorder>
+  <zorder>usersTable</zorder>
+  <zorder>tableWidget</zorder>
+  <zorder>mindreturnButton</zorder>
+  <zorder>closeButton</zorder>
+  <zorder>refreshButton</zorder>
+ </widget>
+ <resources/>
+ <connections/>
+</ui>
