@@ -33,6 +33,7 @@ private:
     QSqlDatabase db;
     QTimer *m_pTimer; // 添加QTimer成员变量
         int m_nCountdown; // 倒计时变量
+        bool allowSignal;
         void initDatabase();
         void loadUsers();//导入用户信息
         void loadborrow(const QString& xuehao);//导入借阅信息

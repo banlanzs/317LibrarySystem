@@ -1,3 +1,4 @@
+
 #ifndef DATABASEMANAGER_H
 #define DATABASEMANAGER_H
 #include <QSqlDatabase>
@@ -24,7 +25,7 @@ public:
         static QSqlDatabase db;
         if (!db.isValid()) {
             db = QSqlDatabase::addDatabase("QMYSQL");
-            db.setHostName("127.0.0.1");
+            db.setHostName("localhost");
             db.setUserName("root");
             db.setPassword("200504024456zsh@");
             db.setDatabaseName("library_db");

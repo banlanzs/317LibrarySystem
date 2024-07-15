@@ -11,7 +11,7 @@
    </rect>
   </property>
   <property name="windowTitle">
-   <string>Dialog</string>
+   <string>预约</string>
   </property>
   <property name="styleSheet">
    <string notr="true">background-image: url(:/new/prefix1/background.png);</string>

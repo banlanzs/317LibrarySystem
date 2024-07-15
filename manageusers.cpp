@@ -15,7 +15,8 @@ ManageUsers::ManageUsers(QWidget *parent) :
     ui(new Ui::ManageUsers),
     emailWidget(new emailyanshi(this)),
     m_pTimer(new QTimer(this)),
-        m_nCountdown(60)// 初始化倒计时为60秒
+        m_nCountdown(60),// 初始化倒计时为60秒
+        allowSignal(false)
 {
     ui->setupUi(this);
     initDatabase();// Initialize database connection
@@ -23,7 +24,13 @@ ManageUsers::ManageUsers(QWidget *parent) :
        //connect(发送对象，信号，接收对象，槽函数)，其中发送信号和槽函数需要用 SIGNAL() 和 SLOT() 来进行声明。
         connect(ui->usersTable, &QTableWidget::cellClicked, this, &ManageUsers::onUserSelectionChanged);
             connect(ui->refreshButton, &QPushButton::clicked, this, &ManageUsers::on_refreshButton_clicked);
-            connect(ui->remindreturnButton, &QPushButton::clicked, emailWidget->getUI()->sendButton,&QPushButton::click);
+            //connect(ui->remindreturnButton, &QPushButton::clicked, emailWidget->getUI()->sendButton,&QPushButton::click);
+            connect(ui->remindreturnButton, &QPushButton::clicked, this, [this]() {
+                if (allowSignal) {
+                    emit emailWidget->getUI()->sendButton->click();
+                }
+            });
+
             // 设置计时器槽函数
                 connect(m_pTimer, &QTimer::timeout, this, &ManageUsers::updateButtonText);
 }
@@ -131,7 +138,57 @@ void ManageUsers::on_closeButton_clicked()
 //提醒归还
 void ManageUsers::on_remindreturnButton_clicked()
 {
+    int row = ui->usersTable->currentRow();
+    QString xuehao = ui->usersTable->item(row, 0)->text();
+    QSqlQuery query(db);
+//    query.prepare("SELECT title FROM borrow WHERE xuehao = :xuehao AND julianday(created_at)-julianday(borrow_time)=7");//SQLITE
+    query.prepare("SELECT title FROM borrow WHERE xuehao = :xuehao AND DATEDIFF(created_at, borrow_time)=7");//MySQL
+    query.bindValue(":xuehao", xuehao);
+    QStringList booknames;
+    if (query.exec()) {
+        while (query.next()) {  // Move to the first record
+            booknames<<query.value(0).toString(); //从检索结果的第一列获得该用户邮箱
+            qDebug() << "将被提醒还书的用户book retrieved:" << booknames;
+            //获取所有符合条件的书名
+        }
+        if (booknames.isEmpty()) {
+            //qDebug() << "No book found for the provided xuehao.";
+            QMessageBox::warning(this,"error","该用户没有需要提醒归还的书！");
+            allowSignal=false;
+            return;
+    } else{
+            qDebug() << "将被提醒还书的用户books retrieved:" << booknames;
+            // 将书名列表连接成一个字符串，用逗号分隔
+                    QString booknamesString = booknames.join("，");
+                    QString message = QString("【图书馆】 尊敬的用户，您好！您的《%1》的可借阅时长还剩下7天，请你在7天内进行归还，谢谢！").arg(booknamesString);
+                    emailWidget->getUI()->textEdit_Text->setText(message);
 
+                    allowSignal=true;
+                    query.prepare("SELECT email from users WHERE xuehao = :xuehao");
+                                query.bindValue(":xuehao", xuehao);
+                                QString email;
+                                if (query.exec()) {
+                                    if (query.next()) {  // Move to the first record
+                                        email = query.value(0).toString(); //从检索结果的第一列获得该用户邮箱
+                                        qDebug() << "将被提醒还书的用户Email retrieved:" << email;
+                                    } else {
+                                        qDebug() << "No email found for the provided xuehao.";
+                                    }
+                                } else {
+                                    qDebug() << "找emailQuery execution error:" << query.lastError().text();
+                                }
+                                emailWidget->getUI()->Rcvemail_lineEdit->setText(email);
+                                updateButtonText();
+                    // 触发 emailyanshi 类中的发送按钮点击事件
+                    emailWidget->getUI()->sendButton->click();
+                    // 发送验证码后，开始倒计时
+                        ui->remindreturnButton->setEnabled(false);
+                        m_nCountdown = 60;
+                        m_pTimer->start(1000);
+        }
+   }else {
+        qDebug() << "找要还的书Query execution error:" << query.lastError().text();
+    }
 }
 
 // 更新按钮文本

@@ -23,7 +23,7 @@ emailyanshi::emailyanshi(QWidget *parent) :
         ui->textEdit_Text->setText("您好！您的验证码为");
         // Generate initial verification code
             verificationCode = generateVerificationCode();
-            ui->textEdit_Text->setText(QString("【图书馆】验证码 %1 用于图书馆账号注册验证，60秒内有效，请勿泄露和转发。如非本人操作，请忽略此邮件。").arg(verificationCode));
+            ui->textEdit_Text->setText(QString("【图书馆】验证码 %1 用于图书馆验证，60秒内有效，请勿泄露和转发。如非本人操作，请忽略此邮件。").arg(verificationCode));
     //点击发送，获取所需参数，进行发送
         connect(ui->sendButton,&QPushButton::clicked,this,[=]{
             this->m_pSocket = new QTcpSocket;
@@ -31,15 +31,21 @@ emailyanshi::emailyanshi(QWidget *parent) :
             this->passwd = ui->logpasswd_lineEidt->text().toUtf8().toBase64();//授权码
             this->sendemail = ui->SendEmail_lineEdit->text().toUtf8();//发送邮箱
             this->rcvemail=ui->Rcvemail_lineEdit->text().toUtf8();//接收邮箱
+//            if(!validateEmail(rcvemail)){
+//                QMessageBox::warning(this,"error","邮箱格式错误！");
+//                ui->SendEmail_lineEdit->clear();
+//                ui->SendEmail_lineEdit->setFocus();
+//                return;
+//            }
             m_receiverData = ui->subject_lineEdit->text().toUtf8();//邮件主题
             s_Content = ui->textEdit_Text->toPlainText().toUtf8();//邮件内容
                 //sendemil_fun();
             if (sendemil_fun()) {
                 emit verificationCodeSent(verificationCode);
-                        QMessageBox::information(this, "结果", "发送成功");
+                        QMessageBox::information(this, "sucess", "邮件发送成功");
                         startCountdown();//读秒60
                     } else {
-                        QMessageBox::warning(this, "结果", "发送失败");
+                        QMessageBox::warning(this, "error", "邮件1发送失败");
                     }
 
         });
@@ -51,13 +57,18 @@ emailyanshi::emailyanshi(QWidget *parent) :
                 if (m_nCountdown <= 0) {
                     m_pTimer->stop();
                     verificationCode = generateVerificationCode();
-                    ui->textEdit_Text->setText(QString("【图书馆】验证码 %1 用于图书馆账号注册验证，60秒内有效，请勿泄露和转发。如非本人操作，请忽略此邮件。").arg(verificationCode));
+                    ui->textEdit_Text->setText(QString("【图书馆】验证码 %1 用于图书馆验证，60秒内有效，请勿泄露和转发。如非本人操作，请忽略此邮件。").arg(verificationCode));
                     ui->sendButton->setEnabled(true);
                     ui->sendButton->setText("发送");
                 }
             });
 }
 
+////qq邮箱判断
+//bool emailyanshi::validateEmail(const QString &email){
+//    QRegExp emailPattern("^[a-zA-Z0-9._%+-]+@qq\\.com$");
+//        return emailPattern.exactMatch(email);
+//}
 emailyanshi::~emailyanshi()
 {
     delete ui;

@@ -1,88 +1,3 @@
-/*
-#include "returnbook.h"
-#include "ui_returnbook.h"
-#include<QMessageBox>
-#include<QSqlQuery>
-#include<QSqlError>
-#include <QDebug>
-#include<QRegularExpression>
-#include<QKeySequenceEdit>
-returnbook::returnbook(QWidget *parent) :
-    QDialog(parent),
-    ui(new Ui::returnbook)
-{
-    ui->setupUi(this);
-    initDatabase();//初始化
-    // 连接信号和槽函数
-    setupConnections();
-}
-
-returnbook::~returnbook()
-{
-    delete ui;
-}
-
-//检查书号格式
-void returnbook::setupConnections(){
-    // 连接编辑完成信号到槽函数
-        connect(ui->Shuhao, &QLineEdit::editingFinished, this, &returnbook::checkShuhaoFormat);
-}
-void returnbook::checkShuhaoFormat() {
-    QString shuhao = ui->Shuhao->text();
-    QString pattern = "^[0-9]{4}-[0-9]{4}$";
-    QRegularExpression re(pattern);
-
-    if (!re.match(shuhao).hasMatch()) {
-        QMessageBox::warning(this, "错误", "书号格式应为0000-0001！");
-        ui->Shuhao->setFocus(); // 将焦点重新设置回书号输入框
-    }
-}
-
-void returnbook::initDatabase()
-{
-    // 使用DatabaseManager获取数据库连接
-    db = DatabaseManager::getDatabase();
-    // 验证是否已经连接
-    if (!db.open()) {
-        qDebug() << db.lastError();
-        QMessageBox::warning(this, "error", "未连接到数据库");
-        return;
-    } else {
-        QMessageBox::information(this, "success", "连接到数据库");
-    }
-}
-
-void returnbook::on_returnButton_clicked()
-{
-    QString shuhao;
-    shuhao=ui->Shuhao->text();//获取书号
-    if(shuhao==""){
-        QMessageBox::warning(this,"","书号不能为空");
-     }
-
-    QSqlQuery checkQuery(db);
-    checkQuery.prepare("SELECT * FROM books WHERE book_id = ? ");
-    checkQuery.addBindValue(shuhao);
-    if (!checkQuery.exec()) {
-        qDebug() << "Check error:" << checkQuery.lastError();
-        QMessageBox::warning(this, "error", "检查错误");
-    }else if(!checkQuery.next()){
-        QMessageBox::warning(this, "error", "书号不存在");
-    }
-    else {
-        QMessageBox::information(this, "", "归还成功！");
-    }
-
-}
-
-void returnbook::on_backButton_2_clicked()
-{
-    emit returntomode();
-    this->hide();
-}
-*/
-
-
 #include "returnbook.h"
 #include "ui_returnbook.h"
 #include<QMessageBox>
@@ -108,23 +23,7 @@ returnbook::~returnbook()
 {
     delete ui;
 }
-/*
-//检查书号格式
-void returnbook::setupConnections(){
-    // 连接编辑完成信号到槽函数
-        connect(ui->Shuhao, &QLineEdit::editingFinished, this, &returnbook::checkShuhaoFormat);
-}
-void returnbook::checkShuhaoFormat() {
-    QString shuhao = ui->Shuhao->text();
-    QString pattern = "^[0-9]{4}-[0-9]{4}$";
-    QRegularExpression re(pattern);
 
-    if (!re.match(shuhao).hasMatch()) {
-        QMessageBox::warning(this, "错误", "书号格式应为0000-0001！");
-        ui->Shuhao->setFocus(); // 将焦点重新设置回书号输入框
-    }
-}
-*/
 void returnbook::initDatabase()
 {
     // 使用DatabaseManager获取数据库连接

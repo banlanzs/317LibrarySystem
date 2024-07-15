@@ -17,7 +17,7 @@
    </size>
   </property>
   <property name="windowTitle">
-   <string>Dialog</string>
+   <string>管理员</string>
   </property>
   <property name="styleSheet">
    <string notr="true">background-image: url(:/new/prefix1/0eefae7af46b407ae390a0fad8c36b7e0bb7a043d956e-UVgqj9_fw658.webp);</string>

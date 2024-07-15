@@ -25,12 +25,14 @@ private slots:
     void on_searchButton_clicked();
 
     void on_borrowButton_clicked();
+        void checkInput();
 
 private:
     Ui::borrowbook *ui;
     QSqlDatabase db;
     void initDatabase();
     void loadBooks();
+
 };
 
 #endif // BORROWBOOK_H

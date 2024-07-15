@@ -17,7 +17,7 @@
    </size>
   </property>
   <property name="windowTitle">
-   <string>Dialog</string>
+   <string>书籍管理</string>
   </property>
   <property name="styleSheet">
    <string notr="true">background-image: url(:/new/prefix1/225ef3557e31ea0.jpg);</string>

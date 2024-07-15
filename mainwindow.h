@@ -29,9 +29,10 @@ private slots:
     //void on_pushButton_clicked();
     void on_LoginButton_clicked();//槽函数不能放到其他地方了，不然不会有任何反应
     void on_out_clicked();
-
+void checkInput();
 
     //void on_pushButton_clicked();//转到邮箱测试
+
 
 private:
     Ui::MainWindow *ui;

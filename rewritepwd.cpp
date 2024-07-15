@@ -42,6 +42,7 @@ rewritepwd::rewritepwd(QWidget *parent) :
     connect(emailWidget,&emailyanshi::verificationCodeSent,this,&rewritepwd::receiveVerificationCode);
     // 设置计时器槽函数
         connect(timer, &QTimer::timeout, this, &rewritepwd::updateButtonText);
+        connect(ui->Reuserid, &QLineEdit::editingFinished, this, &rewritepwd::checkInput);
 }
 
 rewritepwd::~rewritepwd()
@@ -209,5 +210,15 @@ void rewritepwd::updateButtonText()
         timer->stop();
         ui->sendCodeButton->setText("发送验证码");
         ui->sendCodeButton->setEnabled(true);
+    }
+}
+
+
+void rewritepwd::checkInput(){
+        QString input=ui->Reuserid->text();
+        if(input!="admin"&&(input.length()!=9||!input.toUInt())){
+            QMessageBox::warning(this,"error","学号必须是9位数字。");
+            ui->Reuserid->clear();
+            ui->Reuserid->setFocus();
     }
 }

@@ -34,6 +34,7 @@ private slots:
         void updateButtonText(); // 更新按钮文本
         //自动登录
        // void onRegistrationOrPasswordResetSuccess(const QString &inuserid, const QString &newpwd);
+        void checkInput();
 
 private:
     Ui::rewritepwd *ui;

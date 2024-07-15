@@ -1,6 +1,7 @@
 #include "mainwindow.h"
 #include"emailyanshi.h"
 #include"DatabaseManager.h"
+#include"readme.h"
 #include <QApplication>
 #include <QSqlDatabase>     //连接数据库
 #include <QDebug>
@@ -9,7 +10,10 @@ int main(int argc, char *argv[])
 {
     QApplication a(argc, argv);
     MainWindow w;
+    readme r;
+
     w.show();
+    r.show();
 //    emailyanshi*e=new emailyanshi();
 //    e->show();
     //return a.exec();

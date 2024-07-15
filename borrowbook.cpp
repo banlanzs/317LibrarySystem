@@ -1,96 +1,3 @@
-/*
-//#include "borrowbook.h"
-//#include "ui_borrowbook.h"
-//#include<QMessageBox>
-//#include<QSqlQuery>
-//#include<QSqlError>
-//#include<QDebug>
-//#include"DatabaseManager.h"
-//borrowbook::borrowbook(QWidget *parent) :
-//    QDialog(parent),
-//    ui(new Ui::borrowbook)
-//{
-//    ui->setupUi(this);
-//}
-
-//borrowbook::~borrowbook()
-//{
-//    delete ui;
-//}
-
-//void borrowbook::on_borrowButton_clicked()
-//{
-//    QString bookname = ui->bookname->text();
-//    if (bookname.isEmpty()) {
-//        QMessageBox::warning(this, "", "书名不能为空");
-//        return;
-//    }
-
-//    QSqlQuery checkBorrowQuery(db);
-//    checkBorrowQuery.prepare("SELECT * FROM borrowed_books WHERE book_name = ? AND user_id = ?");
-//    checkBorrowQuery.addBindValue(bookname);
-//    // 假设currentUserId是当前用户的ID
-//    // checkBorrowQuery.addBindValue(currentUserId);
-
-//    if (!checkBorrowQuery.exec()) {
-//        qDebug() << "Check borrow error:" << checkBorrowQuery.lastError();
-//        QMessageBox::warning(this, "错误", "检查借阅记录错误");
-//        return;
-//    }
-
-//    if (checkBorrowQuery.next()) {
-//        QMessageBox::warning(this, "错误", "您已经借阅了此书，不能重复借阅！");
-//        return;
-//    }
-
-//    QSqlQuery checkQuery(db);
-//    checkQuery.prepare("SELECT book_id, author, publisher, current_stock FROM books WHERE title = ?");
-//    checkQuery.addBindValue(bookname);
-
-//    if (!checkQuery.exec()) {
-//        qDebug() << "Check error:" << checkQuery.lastError();
-//        QMessageBox::warning(this, "error", "查找错误");
-//        return;
-//    }
-
-//    if (!checkQuery.next()) {
-//        QMessageBox::warning(this, "错误", "书籍未找到");
-//        return;
-//    }
-
-//    QString bookId = checkQuery.value(0).toString();
-//    QString author = checkQuery.value(1).toString();
-//    QString publisher = checkQuery.value(2).toString();
-//    int currentStock = checkQuery.value(3).toInt();
-//    if (currentStock < 1) {
-//        QMessageBox::warning(this, "错误", "当前库存不足");
-//        return;
-//    }
-
-//    // 再次检查库存
-//    QSqlQuery recheckQuery(db);
-//    recheckQuery.prepare("SELECT current_stock FROM books WHERE title = ?");
-//    recheckQuery.addBindValue(bookname);
-
-//    if (!recheckQuery.exec() || !recheckQuery.next() || recheckQuery.value(0).toInt() < 1) {
-//        QMessageBox::warning(this, "错误", "当前库存不足");
-//        return;
-//    }
-
-//    QSqlQuery updateQuery(db);
-//    updateQuery.prepare("UPDATE books SET current_stock = current_stock - 1 WHERE title = ?");
-// }
-
-//void borrowbook::on_backButton_2_clicked()
-//{
-//    this->hide();
-
-//}
-*/
-
-
-
-
 #include "borrowbook.h"
 #include "ui_borrowbook.h"
 #include"DatabaseManager.h"
@@ -107,6 +14,7 @@ borrowbook::borrowbook(QWidget *parent) :
 {
     ui->setupUi(this);
     initDatabase();//初始化数据库连接
+    connect(ui->lineEdit, &QLineEdit::editingFinished, this, &borrowbook::checkInput);
 }
 
 void borrowbook::initDatabase()
@@ -136,8 +44,8 @@ void borrowbook::initDatabase()
                     "book_id VARCHAR(255) NOT NULL,"
                     "title VARCHAR(255) NOT NULL,"
                     "xuehao VARCHAR(255) NOT NULL,"
-                    "borrow_time VARCHAR(255) NOT NULL,"
-                    "created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,"
+                    "borrow_time VARCHAR(255) NOT NULL,"//借阅日期
+                    "created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,"//截止日期
                     "is_online TINYINT DEFAULT 0)");
 
     QSqlQuery createTableQuery(db);  // 声明一个QSqlQuery对象
@@ -253,6 +161,14 @@ void borrowbook::on_borrowButton_clicked()
         QMessageBox::warning(this, "error", "请输入学号");
         return;
     }
+    //checkInput();
+    //检查学号是否符合规范(9位数字长度)，10位会超大小(管理员除外)
+//    if(xuehao!="admin"&&(xuehao.length()!=9||!xuehao.toUInt())){
+//        QMessageBox::warning(this,"error","学号必须是9位数字。");
+//        ui->lineEdit->clear();
+//        ui->lineEdit->setFocus();
+//        return;
+//    }
     QSqlQuery checkQuery(db);
     checkQuery.prepare("SELECT * FROM borrow WHERE title = ? AND xuehao = ?");
     checkQuery.addBindValue(bookname);
@@ -311,3 +227,14 @@ void borrowbook::on_borrowButton_clicked()
         QMessageBox::warning(this, "error", "无该书，借阅书籍失败！");
     }
 }
+
+void borrowbook::checkInput(){
+    QString input=ui->lineEdit->text();
+    if(input.isEmpty()) return;
+    else if((input.length()!=9||!input.toUInt())){
+        QMessageBox::warning(this,"error","学号必须是9位数字。");
+        ui->lineEdit->clear();
+        ui->lineEdit->setFocus();
+     }
+}
+

@@ -18,6 +18,7 @@ MainWindow::MainWindow(QWidget *parent)
 {
     ui->setupUi(this);
     initDatabase(); // 初始化数据库连接
+    connect(ui->userID, &QLineEdit::editingFinished, this, &MainWindow::checkInput);
 }
 
 MainWindow::~MainWindow()
@@ -145,3 +146,13 @@ void MainWindow::on_out_clicked()
 //    ui->userID->setText(userid);
 //    ui->password->setText(password);
 //}
+
+
+void MainWindow::checkInput(){
+    QString input=ui->userID->text();
+    if(input!="admin"&&(input.length()!=9||!input.toUInt())){
+        QMessageBox::warning(this,"error","学号必须是9位数字。");
+        ui->userID->clear();
+        ui->userID->setFocus();
+}
+}
