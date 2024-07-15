@@ -6,132 +6,108 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>396</width>
-    <height>298</height>
+    <width>536</width>
+    <height>500</height>
    </rect>
   </property>
-  <property name="windowTitle">
-   <string>Dialog</string>
+  <property name="minimumSize">
+   <size>
+    <width>500</width>
+    <height>500</height>
+   </size>
   </property>
-  <widget class="QPushButton" name="borrowButton">
-   <property name="geometry">
-    <rect>
-     <x>30</x>
-     <y>170</y>
-     <width>151</width>
-     <height>41</height>
-    </rect>
-   </property>
-   <property name="styleSheet">
-    <string notr="true">background-color: rgb(197, 197, 197);
+  <property name="windowTitle">
+   <string>用户</string>
+  </property>
+  <property name="styleSheet">
+   <string notr="true">background-image: url(:/new/prefix1/225ef3557e31ea0.jpg);</string>
+  </property>
+  <layout class="QGridLayout" name="gridLayout">
+   <item row="2" column="0">
+    <widget class="QPushButton" name="returnBookButton">
+     <property name="minimumSize">
+      <size>
+       <width>300</width>
+       <height>100</height>
+      </size>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">background-color: rgb(197, 197, 197);
 </string>
-   </property>
-   <property name="text">
-    <string>借书</string>
-   </property>
-  </widget>
-  <widget class="QLabel" name="label">
-   <property name="geometry">
-    <rect>
-     <x>30</x>
-     <y>30</y>
-     <width>331</width>
-     <height>71</height>
-    </rect>
-   </property>
-   <property name="styleSheet">
-    <string notr="true">font: 87 24pt &quot;Arial Black&quot;;
-color: rgb(0, 170, 0);</string>
-   </property>
-   <property name="text">
-    <string>请选择您的操作</string>
-   </property>
-  </widget>
-  <widget class="QPushButton" name="backButton">
-   <property name="geometry">
-    <rect>
-     <x>220</x>
-     <y>240</y>
-     <width>151</width>
-     <height>41</height>
-    </rect>
-   </property>
-   <property name="styleSheet">
-    <string notr="true">background-color: rgb(197, 197, 197);</string>
-   </property>
-   <property name="text">
-    <string>返回</string>
-   </property>
-  </widget>
-  <widget class="QWidget" name="widget" native="true">
-   <property name="geometry">
-    <rect>
-     <x>10</x>
-     <y>0</y>
-     <width>401</width>
-     <height>301</height>
-    </rect>
-   </property>
-  </widget>
-  <widget class="QPushButton" name="returnBookButton">
-   <property name="geometry">
-    <rect>
-     <x>30</x>
-     <y>240</y>
-     <width>151</width>
-     <height>41</height>
-    </rect>
-   </property>
-   <property name="styleSheet">
-    <string notr="true">background-color: rgb(197, 197, 197);
+     </property>
+     <property name="text">
+      <string>归还</string>
+     </property>
+    </widget>
+   </item>
+   <item row="0" column="0">
+    <widget class="QPushButton" name="borrowButton">
+     <property name="minimumSize">
+      <size>
+       <width>300</width>
+       <height>100</height>
+      </size>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">background-color: rgb(197, 197, 197);
 </string>
-   </property>
-   <property name="text">
-    <string>归还</string>
-   </property>
-  </widget>
-  <widget class="QPushButton" name="reservationButton">
-   <property name="geometry">
-    <rect>
-     <x>220</x>
-     <y>170</y>
-     <width>151</width>
-     <height>41</height>
-    </rect>
-   </property>
-   <property name="styleSheet">
-    <string notr="true">background-color: rgb(197, 197, 197);</string>
-   </property>
-   <property name="text">
-    <string>预约</string>
-   </property>
-  </widget>
-  <widget class="QGraphicsView" name="graphicsView">
-   <property name="geometry">
-    <rect>
-     <x>0</x>
-     <y>0</y>
-     <width>401</width>
-     <height>301</height>
-    </rect>
-   </property>
-   <property name="minimumSize">
-    <size>
-     <width>401</width>
-     <height>301</height>
-    </size>
-   </property>
-   <property name="styleSheet">
-    <string notr="true">background-image: url(:/new/prefix1/background.png);</string>
-   </property>
-  </widget>
-  <zorder>graphicsView</zorder>
-  <zorder>label</zorder>
-  <zorder>widget</zorder>
+     </property>
+     <property name="text">
+      <string>借书</string>
+     </property>
+     <property name="autoExclusive">
+      <bool>false</bool>
+     </property>
+    </widget>
+   </item>
+   <item row="1" column="0">
+    <widget class="QPushButton" name="reservationButton">
+     <property name="minimumSize">
+      <size>
+       <width>300</width>
+       <height>100</height>
+      </size>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">background-color: rgb(197, 197, 197);</string>
+     </property>
+     <property name="text">
+      <string>预约</string>
+     </property>
+    </widget>
+   </item>
+   <item row="3" column="0">
+    <widget class="QPushButton" name="backButton">
+     <property name="minimumSize">
+      <size>
+       <width>300</width>
+       <height>100</height>
+      </size>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">background-color: rgb(197, 197, 197);</string>
+     </property>
+     <property name="text">
+      <string>返回</string>
+     </property>
+    </widget>
+   </item>
+   <item row="0" column="1" rowspan="4">
+    <widget class="QLabel" name="label">
+     <property name="styleSheet">
+      <string notr="true">image: url(:/new/prefix1/zr9tjspe.png);</string>
+     </property>
+     <property name="text">
+      <string/>
+     </property>
+    </widget>
+   </item>
+  </layout>
   <zorder>borrowButton</zorder>
   <zorder>backButton</zorder>
   <zorder>reservationButton</zorder>
   <zorder>returnBookButton</zorder>
+  <zorder>label</zorder>
  </widget>
  <resources/>
  <connections/>
