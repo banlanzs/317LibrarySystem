@@ -3,6 +3,8 @@
 
 #include <QDialog>
 #include<QSqlDatabase>
+#include"emailyanshi.h"
+#include<QTimer>
 namespace Ui {
 class ManageUsers;
 }
@@ -21,11 +23,19 @@ private slots:
     void on_refreshButton_clicked();
     void on_closeButton_clicked();
 
+    void on_remindreturnButton_clicked();
+    void onUserSelectionChanged();
+    void updateButtonText();
+
 private:
     Ui::ManageUsers *ui;
+    emailyanshi*emailWidget;
     QSqlDatabase db;
+    QTimer *m_pTimer; // 添加QTimer成员变量
+        int m_nCountdown; // 倒计时变量
         void initDatabase();
-        void loadUsers();
+        void loadUsers();//导入用户信息
+        void loadborrow(const QString& xuehao);//导入借阅信息
 };
 
 #endif // MANAGEUSERS_H

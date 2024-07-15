@@ -104,13 +104,13 @@
     </property>
    </column>
   </widget>
-  <widget class="QTableWidget" name="tableWidget">
+  <widget class="QTableWidget" name="borrowTableWidget">
    <property name="geometry">
     <rect>
      <x>10</x>
      <y>280</y>
      <width>418</width>
-     <height>221</height>
+     <height>231</height>
     </rect>
    </property>
    <property name="minimumSize">
@@ -190,10 +190,10 @@
     </property>
    </column>
   </widget>
-  <widget class="QPushButton" name="mindreturnButton">
+  <widget class="QPushButton" name="remindreturnButton">
    <property name="geometry">
     <rect>
-     <x>434</x>
+     <x>440</x>
      <y>280</y>
      <width>131</width>
      <height>51</height>
@@ -212,8 +212,8 @@
   <widget class="QPushButton" name="closeButton">
    <property name="geometry">
     <rect>
-     <x>434</x>
-     <y>450</y>
+     <x>440</x>
+     <y>460</y>
      <width>131</width>
      <height>51</height>
     </rect>
@@ -231,8 +231,8 @@
   <widget class="QPushButton" name="refreshButton">
    <property name="geometry">
     <rect>
-     <x>434</x>
-     <y>337</y>
+     <x>440</x>
+     <y>370</y>
      <width>131</width>
      <height>51</height>
     </rect>
@@ -268,8 +268,8 @@
   </widget>
   <zorder>graphicsView</zorder>
   <zorder>usersTable</zorder>
-  <zorder>tableWidget</zorder>
-  <zorder>mindreturnButton</zorder>
+  <zorder>borrowTableWidget</zorder>
+  <zorder>remindreturnButton</zorder>
   <zorder>closeButton</zorder>
   <zorder>refreshButton</zorder>
  </widget>
