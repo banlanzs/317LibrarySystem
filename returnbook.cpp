@@ -9,9 +9,10 @@
 #include<QDateTime>
 #include<QString>
 
-returnbook::returnbook(QWidget *parent) :
+returnbook::returnbook(QString&xuehao,QWidget *parent) :
     QDialog(parent),
-    ui(new Ui::returnbook)
+    ui(new Ui::returnbook),
+    m_xuehao(xuehao)
 {
     ui->setupUi(this);
     initDatabase();//初始化
@@ -103,7 +104,8 @@ void returnbook::on_backButton_2_clicked()
 }
 void returnbook::loadBooks(){
     QSqlQuery query(db);
-    query.prepare("SELECT * FROM borrow");
+    query.prepare("SELECT * FROM borrow WHERE xuehao=:xuehao");
+    query.bindValue(":xuehao", m_xuehao);
     if (!query.exec()) {
         qDebug() << "Error loading borrow:" << query.lastError();
         return;

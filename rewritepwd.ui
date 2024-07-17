@@ -85,6 +85,9 @@
          <height>80</height>
         </size>
        </property>
+       <property name="echoMode">
+        <enum>QLineEdit::Password</enum>
+       </property>
        <property name="placeholderText">
         <string>请确认新密码......</string>
        </property>
@@ -97,6 +100,9 @@
          <width>490</width>
          <height>80</height>
         </size>
+       </property>
+       <property name="echoMode">
+        <enum>QLineEdit::Password</enum>
        </property>
        <property name="placeholderText">
         <string>请输入新密码......</string>

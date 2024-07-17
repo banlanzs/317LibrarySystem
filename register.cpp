@@ -74,6 +74,7 @@ void Register::validateEmail(){
              QMessageBox::warning(this,"error","邮箱格式错误，必须是QQ邮箱！");
              ui->qqmail->clear();
              ui->qqmail->setFocus();
+             //ui->sendCodeButton->setEnabled(false);
          }
 }
 

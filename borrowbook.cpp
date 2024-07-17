@@ -8,13 +8,17 @@
 #include<QDateTime>
 #include<QString>
 
-borrowbook::borrowbook(QWidget *parent) :
+borrowbook::borrowbook(QString &xuehao,QWidget *parent) :
     QDialog(parent),
-    ui(new Ui::borrowbook)
+    ui(new Ui::borrowbook),
+    m_xuehao(xuehao)
 {
     ui->setupUi(this);
     initDatabase();//初始化数据库连接
+    ui->lineEdit->setText(m_xuehao);
+    ui->lineEdit->setReadOnly(true);
     connect(ui->lineEdit, &QLineEdit::editingFinished, this, &borrowbook::checkInput);
+
 }
 
 void borrowbook::initDatabase()
@@ -156,9 +160,9 @@ void borrowbook::on_borrowButton_clicked()
     }
     //查询的结果
     int id = query.value(0).toInt();
-    QString xuehao=ui->lineEdit->text();
-    if(xuehao==NULL){
-        QMessageBox::warning(this, "error", "请输入学号");
+    ui->lineEdit->setText(m_xuehao);
+    if(m_xuehao==NULL){
+        QMessageBox::warning(this, "error", "学号导入错误！");
         return;
     }
     //checkInput();
@@ -172,7 +176,7 @@ void borrowbook::on_borrowButton_clicked()
     QSqlQuery checkQuery(db);
     checkQuery.prepare("SELECT * FROM borrow WHERE title = ? AND xuehao = ?");
     checkQuery.addBindValue(bookname);
-    checkQuery.addBindValue(xuehao);
+    checkQuery.addBindValue(m_xuehao);
     if (!checkQuery.exec()) {
     }
     if(checkQuery.next()){
@@ -208,7 +212,7 @@ void borrowbook::on_borrowButton_clicked()
         insertquery.prepare(sql);//准备执行插入
         insertquery.addBindValue(shuhao);//插入书号
         insertquery.addBindValue(bookname);//插入书名
-        insertquery.addBindValue(xuehao);//插入学号
+        insertquery.addBindValue(m_xuehao);//插入学号
         insertquery.addBindValue(borrowdate);//插入借书时间
 
         if(!insertquery.exec()){

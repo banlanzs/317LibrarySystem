@@ -5,37 +5,45 @@
 #include"returnbook.h"
 #include"reservation.h"
 #include"managebooks.h"
-UserMode::UserMode(QWidget *parent) :
+UserMode::UserMode(QString xuehao,QWidget *parent) :
     QDialog(parent),
     ui(new Ui::UserMode),
-    borrowbookWindow(new borrowbook),
-    returnbookWindow(new returnbook),
+    m_xuehao(xuehao),
+    borrowbookWindow(new borrowbook(m_xuehao)),
+    returnbookWindow(new returnbook(m_xuehao)),
     reservationWindow(new reservation),
-    managebooksWindow(new managebooks)
+    managebooksWindow(new managebooks),
+    backButtonClicked(false) // 初始化标志位
 {
     ui->setupUi(this);
+    //ui->backButton->setEnabled(false);
     // Connect the return signal from ManageReaders to the slot in Mode
         connect(borrowbookWindow, &borrowbook::returntomode, this, &UserMode::on_returnFromborrowbook);
         connect(returnbookWindow,&returnbook::returntomode,this,&UserMode::on_returnFromreturnbook);
         connect(reservationWindow,&reservation::returntomode,this,&UserMode::on_returnFromreservation);
         connect(borrowbookWindow,&borrowbook::bookBorrowed,managebooksWindow,&managebooks::on_refreshButton_clicked);
+        qDebug()<<"usermode被创建"<<endl;
 }
 
-UserMode::~UserMode()
-{
-    delete ui;
-    delete borrowbookWindow;
-    delete returnbookWindow;
-    delete reservationWindow;
-    delete managebooksWindow;
-}
+
 
 //退出
 void UserMode::on_backButton_clicked()
 {
-    MainWindow*m=new MainWindow();
-    this->close();
-    m->show();
+//    MainWindow*m=new MainWindow();
+//    this->close();
+//    m->show();
+
+    backButtonClicked = true; // 设置标志位
+    MainWindow *mainWindow = qobject_cast<MainWindow *>(parentWidget());
+        if (mainWindow) {
+            mainWindow->show();
+        }else{
+            MainWindow*m=new MainWindow();
+            m->show();
+            this->close();
+        }
+
 }
 
 //进入“借书”页面
@@ -72,4 +80,43 @@ void UserMode::on_returnBookButton_clicked()
 void UserMode::on_returnFromreturnbook(){
     returnbookWindow->hide();
     this->show();
+}
+
+
+UserMode::~UserMode()
+{
+//    delete ui;
+//    qDebug()<<"执行了ui delete"<<endl;
+//    delete borrowbookWindow;
+//    qDebug()<<"执行了b delete"<<endl;
+//    delete returnbookWindow;
+//    qDebug()<<"执行了r delete"<<endl;
+//    delete reservationWindow;
+//    qDebug()<<"执行了re delete"<<endl;
+//    delete managebooksWindow;
+//    qDebug()<<"执行了m delete"<<endl;
+    if(backButtonClicked){
+    delete ui;
+        if (borrowbookWindow) {
+            delete borrowbookWindow;
+            borrowbookWindow = nullptr;
+            qDebug() << "Deleted borrowbookWindow";
+        }
+        if (returnbookWindow) {
+            delete returnbookWindow;
+            returnbookWindow = nullptr;
+            qDebug() << "Deleted returnbookWindow";
+        }
+        if (reservationWindow) {
+            delete reservationWindow;
+            reservationWindow = nullptr;
+            qDebug() << "Deleted reservationWindow";
+        }
+        if (managebooksWindow) {
+            delete managebooksWindow;
+            managebooksWindow = nullptr;
+            qDebug() << "Deleted managebooksWindow";
+        }
+        qDebug() << "UserMode destructor called";
+    }
 }

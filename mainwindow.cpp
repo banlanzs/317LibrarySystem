@@ -12,21 +12,51 @@
 #include <QMessageBox>//消息盒子
 #include <QSettings>    //读写配置文件
 #include"emailyanshi.h"
+#include<QCloseEvent>
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent),
-    ui(new Ui::MainWindow)
+    ui(new Ui::MainWindow),
+  exitButtonClicked(false),
+  userWindow(nullptr)
 {
     ui->setupUi(this);
     initDatabase(); // 初始化数据库连接
+    //ui->out->setEnabled(false);
     connect(ui->userID, &QLineEdit::editingFinished, this, &MainWindow::checkInput);
+    qDebug()<<"MainWindow被创建"<<endl;
 }
 
 MainWindow::~MainWindow()
 {
+    //if(exitButtonClicked){
     delete ui;
     DatabaseManager::closeDatabase();
+    qDebug()<<"ui->out->isEnabled(),MainWindow被销毁"<<endl;
+    //}
+    if (userWindow) {
+           delete userWindow; // 确保userWindow被正确销毁
+           qDebug() << "UserWindow被销毁" << endl;
+       }
 }
 
+//退出
+void MainWindow::on_out_clicked()
+{
+    exitButtonClicked = true;  // Set the flag to true
+    this->close();
+    DatabaseManager::closeDatabase();
+}
+//void MainWindow::closeEvent(QCloseEvent *event)
+//{
+//    if (exitButtonClicked) {
+//        // Perform cleanup
+//        DatabaseManager::closeDatabase();
+//        QMainWindow::closeEvent(event);  // Call the base class implementation
+//        qDebug()<<"MainWindow被销毁"<<endl;
+//    } else {
+//        event->ignore();  // Ignore the close event
+//    }
+//}
 void MainWindow::initDatabase(){
 //    db = QSqlDatabase::addDatabase("QSQLITE", "library_connection");
 //    db.setDatabaseName("library.db");
@@ -62,17 +92,22 @@ bool MainWindow::validateUser(const QString &userid, const QString &password)
                     if (userid == "admin") {
                                 // 打开管理员界面
                                 Mode *adminWindow = new Mode();
-                                adminWindow->show();
+                                //adminWindow->show();
+                                adminWindow->setAttribute(Qt::WA_DeleteOnClose);
+                                               adminWindow->show();
                             } else {
                                 // 打开普通用户界面
-                                UserMode *userWindow = new UserMode();
-                                userWindow->show();
+                                UserMode *userWindow = new UserMode(userid);//继承了，导致MainWindow被删除时usermode也被删了
+//                                //userWindow->show();
+                                userWindow->setAttribute(Qt::WA_DeleteOnClose);
+                                                userWindow->show();
                             }
                     QSqlQuery updateQuery(db);
                             updateQuery.prepare("UPDATE users SET is_online = 1 WHERE xuehao = ?");
                             updateQuery.addBindValue(userid);
                             updateQuery.exec();//更新在线状态
-                    this->close();
+                    //this->close();
+                            this->hide();
                     return true; // 用户存在且密码正确
                 }
             } else {
@@ -133,12 +168,7 @@ void MainWindow::on_LoginButton_clicked()
 //    e->show();
 //}
 
-//退出
-void MainWindow::on_out_clicked()
-{
-    this->close();
-    DatabaseManager::closeDatabase();
-}
+
 
 ////填充账号密码
 //void MainWindow::fillCredentials(const QString &userid, const QString &password) {

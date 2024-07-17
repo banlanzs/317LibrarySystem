@@ -52,7 +52,7 @@ class returnbook : public QDialog
     Q_OBJECT
 
 public:
-    explicit returnbook(QWidget *parent = nullptr);
+    explicit returnbook(QString &xuehao,QWidget *parent = nullptr);
     ~returnbook();
 signals:
     void returntomode();//->closeButton
@@ -71,6 +71,7 @@ private:
     Ui::returnbook *ui;
     QSqlDatabase db;
     void initDatabase();//声明操作数据库函数
+    QString m_xuehao;
     void saveToDatabase();//保存数据函数
     //void setupConnections();
     void loadBooks();

@@ -15,7 +15,7 @@ class UserMode : public QDialog
     Q_OBJECT
 
 public:
-    explicit UserMode(QWidget *parent = nullptr);
+    explicit UserMode(QString xuehao,QWidget *parent = nullptr);
     ~UserMode();
 
 private slots:
@@ -31,10 +31,12 @@ private slots:
 
 private:
     Ui::UserMode *ui;
+    QString m_xuehao;
     borrowbook*borrowbookWindow;
     returnbook*returnbookWindow;
     reservation*reservationWindow;
     managebooks*managebooksWindow;
+    bool backButtonClicked; // 添加标志位
 };
 
 #endif // USERMODE_H

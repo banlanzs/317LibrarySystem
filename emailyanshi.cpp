@@ -31,12 +31,13 @@ emailyanshi::emailyanshi(QWidget *parent) :
             this->passwd = ui->logpasswd_lineEidt->text().toUtf8().toBase64();//授权码
             this->sendemail = ui->SendEmail_lineEdit->text().toUtf8();//发送邮箱
             this->rcvemail=ui->Rcvemail_lineEdit->text().toUtf8();//接收邮箱
-//            if(!validateEmail(rcvemail)){
-//                QMessageBox::warning(this,"error","邮箱格式错误！");
-//                ui->SendEmail_lineEdit->clear();
-//                ui->SendEmail_lineEdit->setFocus();
-//                return;
-//            }
+            if(!validateEmail(rcvemail)){
+                QMessageBox::warning(this,"error","邮箱格式错误！");
+                ui->sendButton->setEnabled(false);
+                ui->SendEmail_lineEdit->clear();
+                ui->SendEmail_lineEdit->setFocus();
+                return;
+            }else ui->sendButton->setEnabled(true);
             m_receiverData = ui->subject_lineEdit->text().toUtf8();//邮件主题
             s_Content = ui->textEdit_Text->toPlainText().toUtf8();//邮件内容
                 //sendemil_fun();
@@ -65,10 +66,10 @@ emailyanshi::emailyanshi(QWidget *parent) :
 }
 
 ////qq邮箱判断
-//bool emailyanshi::validateEmail(const QString &email){
-//    QRegExp emailPattern("^[a-zA-Z0-9._%+-]+@qq\\.com$");
-//        return emailPattern.exactMatch(email);
-//}
+bool emailyanshi::validateEmail(const QString &email){
+    QRegExp emailPattern("^[a-zA-Z0-9._%+-]+@qq\\.com$");
+        return emailPattern.exactMatch(email);
+}
 emailyanshi::~emailyanshi()
 {
     delete ui;

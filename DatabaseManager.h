@@ -1,10 +1,12 @@
-
 #ifndef DATABASEMANAGER_H
 #define DATABASEMANAGER_H
 #include <QSqlDatabase>
 #include <QSqlError>
 #include <QDebug>
 #include<QPluginLoader>
+#include <QFile>
+#include <QJsonDocument>
+#include <QJsonObject>
 class DatabaseManager {
 public:
 //    static QSqlDatabase& getDatabase() {
@@ -25,7 +27,8 @@ public:
         static QSqlDatabase db;
         if (!db.isValid()) {
             db = QSqlDatabase::addDatabase("QMYSQL");
-            db.setHostName("localhost");
+//            db.setHostName("localhost");
+            db.setHostName("10.133.169.69");
             db.setUserName("root");
             db.setPassword("200504024456zsh@");
             db.setDatabaseName("library_db");

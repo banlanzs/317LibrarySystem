@@ -50,7 +50,7 @@ private:
         QString m_receiverData;
         QTimer *m_pTimer; // 添加QTimer成员变量
         int m_nCountdown; // 倒计时变量
-        //bool validateEmail(const QString&email);
+        bool validateEmail(const QString&email);
 
         //登陆smtp服务器时所需的id和password，需要是base64编码格式
         QByteArray name;

@@ -6,6 +6,7 @@
 #include<QSqlError>
 #include<QDebug>
 #include<QMessageBox>
+#include<QAbstractItemView>
 managebooks::managebooks(QWidget *parent) :
     QDialog(parent),
     ui(new Ui::managebooks)

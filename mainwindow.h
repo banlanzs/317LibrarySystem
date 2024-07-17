@@ -5,6 +5,8 @@
 #include<QMessageBox>
 #include<QSqlQuery>
 #include<QSqlDatabase>
+#include"usermode.h"
+#include"borrowbook.h"
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }
 QT_END_NAMESPACE
@@ -21,6 +23,8 @@ public:
     //填充
     //void fillCredentials(const QString &userid, const QString &password);
     //void on_LoginButton_clicked();//登录功能caohanshu
+//protected:
+//    void closeEvent(QCloseEvent *event) override;
 
 private slots:
     void on_RegisterButton_clicked();//转到注册
@@ -38,6 +42,9 @@ private:
     Ui::MainWindow *ui;
     QSqlDatabase db;
     void initDatabase();
+    bool exitButtonClicked;
+    UserMode *userWindow;
+
 
 };
 #endif // MAINWINDOW_H
