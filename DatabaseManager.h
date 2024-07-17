@@ -28,7 +28,7 @@ public:
         if (!db.isValid()) {
             db = QSqlDatabase::addDatabase("QMYSQL");
 //            db.setHostName("localhost");
-            db.setHostName("10.133.169.69");
+            db.setHostName("localhost");
             db.setUserName("root");
             db.setPassword("200504024456zsh@");
             db.setDatabaseName("library_db");
