@@ -37,20 +37,20 @@ void borrowbook::initDatabase()
     }
 
     // 构建borrow表
-//    QString sql("CREATE TABLE IF NOT EXISTS borrow("//检查表是否存在
-//                "book_id text not null,"
-//                "title text not null ,"
-//                "xuehao text not null ,"
-//                "borrow_time text not null,"
-//                "created_at DATETIME DEFAULT CURRENT_TIMESTAMP,"
-//                "is_online INTEGER DEFAULT 0)");
-    QString sql("CREATE TABLE IF NOT EXISTS borrow ("
-                    "book_id VARCHAR(255) NOT NULL,"
-                    "title VARCHAR(255) NOT NULL,"
-                    "xuehao VARCHAR(255) NOT NULL,"
-                    "borrow_time VARCHAR(255) NOT NULL,"//借阅日期
-                    "created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,"//截止日期
-                    "is_online TINYINT DEFAULT 0)");
+    QString sql("CREATE TABLE IF NOT EXISTS borrow("//检查表是否存在
+                "book_id text not null,"
+                "title text not null ,"
+                "xuehao text not null ,"
+                "borrow_time text not null,"
+                "created_at DATETIME DEFAULT CURRENT_TIMESTAMP,"
+                "is_online INTEGER DEFAULT 0)");
+//    QString sql("CREATE TABLE IF NOT EXISTS borrow ("
+//                    "book_id VARCHAR(255) NOT NULL,"
+//                    "title VARCHAR(255) NOT NULL,"
+//                    "xuehao VARCHAR(255) NOT NULL,"
+//                    "borrow_time VARCHAR(255) NOT NULL,"//借阅日期
+//                    "created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,"//截止日期
+//                    "is_online TINYINT DEFAULT 0)");
 
     QSqlQuery createTableQuery(db);  // 声明一个QSqlQuery对象
     if (!createTableQuery.exec(sql)) {

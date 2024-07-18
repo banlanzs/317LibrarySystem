@@ -141,8 +141,8 @@ void ManageUsers::on_remindreturnButton_clicked()
     int row = ui->usersTable->currentRow();
     QString xuehao = ui->usersTable->item(row, 0)->text();
     QSqlQuery query(db);
-//    query.prepare("SELECT title FROM borrow WHERE xuehao = :xuehao AND julianday(created_at)-julianday(borrow_time)=7");//SQLITE
-    query.prepare("SELECT title FROM borrow WHERE xuehao = :xuehao AND DATEDIFF(created_at, borrow_time)=7");//MySQL
+   query.prepare("SELECT title FROM borrow WHERE xuehao = :xuehao AND julianday(created_at)-julianday(borrow_time)=7");//SQLITE
+    //query.prepare("SELECT title FROM borrow WHERE xuehao = :xuehao AND DATEDIFF(created_at, borrow_time)=7");//MySQL
     query.bindValue(":xuehao", xuehao);
     QStringList booknames;
     if (query.exec()) {

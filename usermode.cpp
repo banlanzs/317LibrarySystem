@@ -38,6 +38,7 @@ void UserMode::on_backButton_clicked()
     MainWindow *mainWindow = qobject_cast<MainWindow *>(parentWidget());
         if (mainWindow) {
             mainWindow->show();
+            this->close();
         }else{
             MainWindow*m=new MainWindow();
             m->show();

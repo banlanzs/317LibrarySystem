@@ -157,12 +157,12 @@ void Register::initDatabase(){
     //////////////////////////////////////////////////////////////////////
     //检查表是否存在，并检查是否需要添加新列
         QSqlQuery query(db);
-        //if (query.exec("PRAGMA table_info(users)")) {//SQLITE的
-        if (query.exec("DESCRIBE users")) {//MYSQL的
+        if (query.exec("PRAGMA table_info(users)")) {//SQLITE的
+        //if (query.exec("DESCRIBE users")) {//MYSQL的
             bool createTimeExists = false;
             while (query.next()) {
-                QString columnName = query.value(0).toString();
-                //QString columnName = query.value(1).toString();//sqlite的,在MySQL会导致Add create_time column error: QSqlError("1060", "QMYSQL: Unable to execute query", "Duplicate column name 'create_time'")
+                //QString columnName = query.value(0).toString();
+                QString columnName = query.value(1).toString();//sqlite的,在MySQL会导致Add create_time column error: QSqlError("1060", "QMYSQL: Unable to execute query", "Duplicate column name 'create_time'")
                 if (columnName == "create_time") {
                     createTimeExists = true;
                     break;
@@ -185,21 +185,21 @@ void Register::initDatabase(){
 
     //构建users表
     //sql语句
-//    QString sql("CREATE TABLE IF NOT EXISTS users("//检查表是否存在
-//                "xuehao text not null,"
-//                "password text not null ,"
-//                "email text not null unique,"
-//                "create_time text not null,"
-//                "created_at DATETIME DEFAULT CURRENT_TIMESTAMP,"
-//                "is_online INTEGER DEFAULT 0)");//此处表明email不为空，则后面插入管理员时不能为空，随便写一个替代即可
+    QString sql("CREATE TABLE IF NOT EXISTS users("//检查表是否存在
+                "xuehao text not null,"
+                "password text not null ,"
+                "email text not null unique,"
+                "create_time text not null,"
+                "created_at DATETIME DEFAULT CURRENT_TIMESTAMP,"
+                "is_online INTEGER DEFAULT 0)");//此处表明email不为空，则后面插入管理员时不能为空，随便写一个替代即可
 
-        QString sql("CREATE TABLE IF NOT EXISTS users("//检查表是否存在
-                       "xuehao VARCHAR(255) NOT NULL,"
-                       "password VARCHAR(255) NOT NULL,"
-                       "email VARCHAR(255) NOT NULL ,"
-                       "create_time VARCHAR(255) NOT NULL,"
-                       "created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,"
-                       "is_online INTEGER DEFAULT 0)"); //此处表明email不为空，则后面插入管理员时不能为空，随便写一个替代即可
+//        QString sql("CREATE TABLE IF NOT EXISTS users("//检查表是否存在
+//                       "xuehao VARCHAR(255) NOT NULL,"
+//                       "password VARCHAR(255) NOT NULL,"
+//                       "email VARCHAR(255) NOT NULL ,"
+//                       "create_time VARCHAR(255) NOT NULL,"
+//                       "created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,"
+//                       "is_online INTEGER DEFAULT 0)"); //此处表明email不为空，则后面插入管理员时不能为空，随便写一个替代即可
 
 
 

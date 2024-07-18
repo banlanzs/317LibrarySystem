@@ -6,6 +6,7 @@
 #include <QMessageBox>
 #include <QDebug>
 #include<QRegularExpression>
+#include<QSqlDatabase>
 BookIn::BookIn(QWidget *parent) :
     QDialog(parent),
     ui(new Ui::BookIn)
@@ -43,7 +44,6 @@ void BookIn::checkBookExists() {
         return;
     }
 
-    //有记录
     if (checkQuery.next()) {
         QString author = checkQuery.value(0).toString();
         QString publisher = checkQuery.value(1).toString();
@@ -93,20 +93,21 @@ void BookIn::initDatabase()
     }
 
     // 构建books表
-//    QString sql("CREATE TABLE IF NOT EXISTS books ("
-//                "book_id TEXT NOT NULL PRIMARY KEY,"//书号
-//                "title TEXT NOT NULL,"//书名
-//                "author TEXT NOT NULL,"//作者
-//                "publisher TEXT NOT NULL,"//出版社
-//                "total_stock INTEGER DEFAULT 0 NOT NULL,"//总库存
-//                "current_stock INTEGER DEFAULT 0 NOT NULL)");//当前库存
     QString sql("CREATE TABLE IF NOT EXISTS books ("
-                    "book_id VARCHAR(255) NOT NULL PRIMARY KEY," // 书号
-                    "title VARCHAR(255) NOT NULL," // 书名
-                    "author VARCHAR(255) NOT NULL," // 作者
-                    "publisher VARCHAR(255) NOT NULL," // 出版社
-                    "total_stock INT DEFAULT 0 NOT NULL," // 总库存
-                    "current_stock INT DEFAULT 0 NOT NULL)"); // 当前库存
+                "book_id TEXT NOT NULL PRIMARY KEY,"//书号
+                "title TEXT NOT NULL,"//书名
+                "author TEXT NOT NULL,"//作者
+                "publisher TEXT NOT NULL,"//出版社
+                "total_stock INTEGER DEFAULT 0 NOT NULL,"//总库存
+                "current_stock INTEGER DEFAULT 0 NOT NULL)");//当前库存
+
+//    QString sql("CREATE TABLE IF NOT EXISTS books ("
+//                    "book_id VARCHAR(255) NOT NULL PRIMARY KEY," // 书号
+//                    "title VARCHAR(255) NOT NULL," // 书名
+//                    "author VARCHAR(255) NOT NULL," // 作者
+//                    "publisher VARCHAR(255) NOT NULL," // 出版社
+//                    "total_stock INT DEFAULT 0 NOT NULL," // 总库存
+//                    "current_stock INT DEFAULT 0 NOT NULL)"); // 当前库存
 
     QSqlQuery createTableQuery(db);  // 声明一个QSqlQuery对象
     if (!createTableQuery.exec(sql)) {
