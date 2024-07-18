@@ -6,6 +6,7 @@ readme::readme(QWidget *parent) :
     ui(new Ui::readme)
 {
     ui->setupUi(this);
+    ui->plainTextEdit->setTextInteractionFlags(Qt::NoTextInteraction);
 }
 
 readme::~readme()

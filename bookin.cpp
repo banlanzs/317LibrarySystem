@@ -43,6 +43,7 @@ void BookIn::checkBookExists() {
         return;
     }
 
+    //有记录
     if (checkQuery.next()) {
         QString author = checkQuery.value(0).toString();
         QString publisher = checkQuery.value(1).toString();
@@ -214,6 +215,12 @@ void BookIn::saveToDatabase(){
 //返回
 void BookIn::on_BackButton_clicked()
 {
+    ui->BookName->clear();
+    ui->Writer->clear();
+    ui->Publisher->clear();
+    ui->BookInspinBox->setValue(0);
+    ui->CurrentBookNumber->display(0);
+    ui->TotalBookNumber->display(0);
     emit returntomode();  // Emit the signal to return to the Mode window
     this->hide();  // Hide the BookIn window
 }
