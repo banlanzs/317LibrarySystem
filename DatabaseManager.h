@@ -30,7 +30,7 @@ public:
 //            db.setHostName("localhost");
             db.setHostName("localhost");
             db.setUserName("root");
-            db.setPassword("200504024456zsh@");
+            db.setPassword("password");
             db.setDatabaseName("library_db");
 
 //            QPluginLoader loader;
